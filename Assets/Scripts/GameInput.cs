@@ -5,9 +5,18 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
 
+    PlayerInputActions playerInputActions;
+
+    private void Awake()
+    {
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+    }
     public Vector2 GetMovementVectorNormalized()
     {
-        return new Vector2(0,0);
+        Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+        inputVector = inputVector.normalized;
+        return inputVector;
     }
 
     // Start is called before the first frame update
